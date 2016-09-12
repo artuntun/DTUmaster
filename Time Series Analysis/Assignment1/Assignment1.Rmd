@@ -1,0 +1,308 @@
+---
+title: "Assignment 1"
+author: "Arturo Arranz Mateo in colaboration with Dominik Dominković"
+date: "March 2, 2016"
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+---
+
+
+# Question 1
+\textit{Plot the apartment price as a function of time.}
+```{r qestion1,include=FALSE}
+mydata = read.csv("~/workspace_r/apartment_prices.csv")
+years = as.matrix(mydata[,2])
+prices = as.matrix(mydata[,3])
+dim(years)
+cbind(matrix(1,dim(years)),prices)
+shapiro.test(rnorm(100, mean = 5, sd = 3))
+shapiro.test(prices)
+qqnorm(mydata[,3]); qqline(mydata[,3])
+hist(mydata[,3])
+```
+
+```{r plotting1, echo=FALSE}
+plot(years, prices)
+```
+
+#Question 2
+\textit{Does the global mean value and standard deviation of the prices give a reasonable
+representation of the data? (The answer should be elaborated.)}
+```{r qestion2,include=FALSE}
+mu = mean(prices)
+std = sd(prices, na.rm = FALSE)
+```
+
+```{r plotting2, echo=FALSE}
+plot(years, prices, ylim = c(1.2*(mu-3*std),1.2*(mu+3*std)))
+lines(years,matrix(mu,dim(years)),col="blue",lwd=2)
+lines(years, matrix(3*std+mu,dim(years)),col="green",type="l", lty=2, lwd=1)
+lines(years, matrix(mu-3*std,dim(years)),col="green",type="l", lty=2, lwd=1)
+```
+
+As we can see in the graphic, the mean and the standard deviation by itself, do not give us any information about the trend. It would be useful in the case, we were dealing with white noise, where the data is normally distributed. Here clearly, we have a trend. 
+In the Q-Q plot we can see clearly how the data is not normally distributed.
+
+```{r plotting90, echo=FALSE}
+qqnorm(mydata[,3]); qqline(mydata[,3])
+```
+
+#Question 3
+\textit{Let us consider a model for all the data.
+Formulate a GLM model in form of a simple linear regression model for all the data.
+Estimate the model parameters. Would this model be useful for making predictions of
+future apartment prices?}
+
+```{r question3, echo=FALSE}
+x = cbind(matrix(1,dim(years)),years)
+estimated_theta = solve(t(x) %*% x) %*% t(x) %*% prices
+y = x %*% estimated_theta
+errors = y - prices
+std_errors = sd(errors, na.rm = FALSE)
+```
+
+```{r plotting3, echo=FALSE}
+plot(years, prices, ylim = c(1.2*(mu-3*std),1.2*(mu+3*std)))
+lines(years, y ,col="blue",lwd=2)
+lines(years, y+3*std_errors,col="green",type="l", lty=2, lwd=1)
+lines(years, y-3*std_errors,col="green",type="l", lty=2, lwd=1)
+```
+
+As we can see in the plot, we can make predictions based on the global trend. However, around 2006, the data is more than 3 times bigger than the standard deviation respect our prediction. 
+This is not a very robust model for rapid changes on the trend. 
+In additio, the spike from 2006, have a big impact on the model, which is carried during the next predictions. 
+
+#Question 4
+
+\textit{Now we will consider methods which considers data more locally. Use simple
+exponential smoothing to predict the apartment prices for the remaining part of 2015 and
+2016. (Just choose a value for the smoothing constant, eg. $\lambda = 0.9$).
+Comment on the results.}
+
+The simple exponential smoothing can be written as:
+
+$$\hat{Y}_{N+l|N} = c\sum_{j=0}^{N-1}\lambda^{j}Y_{N-j} = c[Y_{N} + \lambda Y_{N-1}+...+\lambda^{N-1}Y_{1}] $$
+
+Where \textit{c} is the normalizing constant which is choosen such that the sum of the weights is 1. If N is large we obtain  $c \approx (1 - \lambda)$. With this assumption we can construct the ons-step prediction:
+
+$$\hat{Y}_{N+2|N+1} = (1-\lambda)\sum_{j=0}\lambda^{j}Y_{N+1-j} = (1-\lambda)Y_{N+1}+\lambda\hat{Y}_{N+1|N}$$
+
+```{r calculate, echo=FALSE}
+
+N = length(prices)
+lambda = 0.75
+estimated_price = matrix(prices[1],1,1) #Initical value
+
+# Simple exponential smoothing for lambda = 0.75
+# Y'_N+l|N = mu_N  // Y'_N+l+1|N+1 = (1-lambda)Y_N+1 + Y'_N+l|N 
+for(i in 1:N){
+ estimation = (1-lambda)*prices[i]+lambda*estimated_price[i] 
+ estimated_price = cbind(estimated_price, estimation)
+}
+plot(years, prices, ylim = c(5000,33000), xlim = c(1991,2017))
+lines(years, estimated_price[1:93], col="blue",lwd=2)
+
+#Predictions for lambda = 0.75
+last_meas = prices[93]
+predictions_075 = matrix(estimated_price[93],1,1)
+for(i in 1:8){
+ pred = (1-lambda)*last_meas+lambda*predictions_075[i] 
+ predictions_075 = cbind(predictions_075, pred)
+}
+t = 2015 + 0.25*(length(predictions_075)) # 2017
+years_predicted = seq(from=2015,to=t-0.25,by=0.25) # years: 2015.25, 2015.5.. 2017
+lines(years_predicted, predictions_075, lty=3,col="red",lwd=2)
+
+lambda = 0.9
+estimated_price_09 = matrix(prices[1],1,1)  #Initical value
+# Simple exponential smoothing for lambda = 0.9
+for(i in 1:N){
+ estimation = (1-lambda)*prices[i]+lambda*estimated_price_09[i] 
+ estimated_price_09 = cbind(estimated_price_09, estimation)
+}
+lines(years, estimated_price_09[1:93], col="green",lwd=2)
+
+#Predictions for lambda = 0.9
+last_meas = prices[93] 
+predictions_09 = matrix(estimated_price_09[93],1,1)
+for(i in 1:8){
+ pred = (1-lambda)*last_meas+lambda*predictions_09[i] 
+ predictions_09 = cbind(predictions_09, pred)
+}
+t = 2015 + 0.25*(length(predictions_09)) # 2017
+years_predicted = seq(from=2015,to=t-0.25,by=0.25) # years: 2015.25, 2015.5.. 2017
+lines(years_predicted, predictions_09, lty=3,col="red",lwd=2)
+```
+
+The predictions for lambda = 0.9:
+\begin{tabular}{l | l | l | l | l | l | l | l |l}
+  2015 & 2015.25 & 2015.5 & 2015.75 & 2016 & 2016.25 & 2016.5 & 2016.75 & 2017\\
+  \hline
+  22533.25 & 22838.52 & 23113.27 & 23360.54 & 23583.09 & 23783.38 & 23963.64 & 24125.88 & 24271.89\\\
+\end{tabular}
+
+In the graph is represented a simple model with lambda \textbf{0.9 in green} and \textbf{0.75 in blue.}
+
+We can notice several things from the graph. First, we can notice the effect on choosing a lower or higher forgetting factor. A larger lambda \textbf{react slower to changes} as we can see from the green line. Also we can see how a lower lambda \textbf{is more sensitive} to drastic changes in the trend. We can see how the blue line follow the spike from the year 2006.
+
+Secondly, at the predictions we can see how we can not infer a trend with a constant \textbf{locally mean model}. This model is useful for one-step predictions, since for calculating each new predictions, we need the measurement from current state. 
+
+Note that for calculating the predictions I assumed that each one-step predictions would be the same as the last measurment.
+
+$$\hat{Y}_{94|93} = (1-\lambda)\hat{Y}_{93}+\lambda\hat{Y}_{93|92}$$
+$$\hat{Y}_{95|93} = (1-\lambda)\hat{Y}_{93}+\lambda\hat{Y}_{94|93}$$
+$$\hat{Y}_{95|93} = (1-\lambda)\hat{Y}_{93}+\lambda\hat{Y}_{95|94}$$
+
+We can see how slowly the predictions reach the last measurment. When this value is reached, the predictions are constant. 
+
+#Question 5
+
+\textit{Use a local linear trend model to predict the apartment prices for the remaining
+part of 2015 and 2016. State the uncertainty of the predictions.
+Comment on the results.}
+
+In the local trend model we create a linear model which iteratively update the parameters, $\theta$, and also include a forgetting factor, $\lambda$, which give more value to recent data. 
+We can write this case as: 
+$$\hat{\theta}_{N} = arg \underset{\theta}{\text{min}} S(\theta; N)$$
+
+$$S(\theta; N) = \sum_{j=0}^{N-1}\lambda^{j}[Y_{N-j}-f^{T}(-j)\theta]^{2}$$
+
+Before solving the minimizing problem we have to work on our model. We need to create a global model. We aim to create a linear model:
+
+$$Y_{N+j} = \theta_{0}+\theta_{1}j+\epsilon_{N+j} \quad \Rightarrow \quad Y_{N+j} = f^{T}(j)\theta+\epsilon_{N+j} $$$$\text{where} \quad f(j)=(1\quad j)^{T}$$
+
+For multivariate:
+$$Y_{N}=x_{N}\theta_{N}+\epsilon_{N}$$
+\
+$$\begin{bmatrix}Y_{1} \\[0.3em] Y_{2} \\[0.3em]\vdots \\[0.3em]Y_{N}\end{bmatrix} =
+\begin{bmatrix}f^{T}(-N+1) \\[0.3em] f^{T}(-N+2) \\[0.3em]\vdots \\[0.3em]f^{T}(0)\end{bmatrix}\theta_{N} +
+\begin{bmatrix}\epsilon_{1} \\[0.3em] \epsilon_{2} \\[0.3em]\vdots \\[0.3em]\epsilon_{N}\end{bmatrix}
+\quad
+\Rightarrow
+\quad
+\begin{bmatrix}7968 \\[0.3em] 8055 \\[0.3em]\vdots \\[0.3em]25586\end{bmatrix} =
+\begin{bmatrix}f^{T}(92) \\[0.3em] f^{T}(91) \\[0.3em]\vdots \\[0.3em]f^{T}(0)\end{bmatrix}\theta_{N} +
+\begin{bmatrix}\epsilon_{1} \\[0.3em] \epsilon_{2} \\[0.3em]\vdots \\[0.3em]\epsilon_{N}\end{bmatrix}$$
+
+Now, solving the minimizing problem we get a WLS:
+$$\hat{\theta}_N = ((x_{N})^{T}\Sigma^{-1}x_{N})^(-1)(x_{N})^{T}\Sigma^{-1}Y$$
+\
+where the weight matrix is: 
+$$\begin{bmatrix}
+  \lambda^{N-1} & 0 & \cdots & 0 \\
+  0 & \lambda^{N-1} & \cdots & 0 \\
+  \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & \cdots & 1
+ \end{bmatrix} =
+ \begin{bmatrix}
+  0.9^{92} & 0 & \cdots & 0 \\
+  0 & 0.9^{91} & \cdots & 0 \\
+  \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & \cdots & 1
+ \end{bmatrix}
+ $$
+ 
+Our estimated parameters are:
+$$\hat{\theta}_N = F^{-1}h{N} = {\begin{bmatrix} 23957 &  124  \end{bmatrix}}^{T}$$
+$$F^{-1} = ((x_{N})^{T}\Sigma^{-1}x_{N})^{-1}$$
+$$h{N} = (x_{N})^{T}\Sigma^{-1}Y$$
+
+Now we can do one step predictions:
+
+$$Y_{N+j} = f(j+1)^{T}\theta$$
+
+We can transit from j to j+1 with:
+
+$$f(j+1) = Lf(j)$$
+$$L = \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix} \quad f(0) = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$$
+
+ 
+```{r calculate1, echo=FALSE}
+x = cbind(matrix(1,dim(years)), matrix(-seq(length(years)-1,0,-1)))
+len = length(years)
+lambda = 0.9
+Sigma_inverse = matrix(0,len,len)
+for(i in 0:(len-1)){
+  new_lambda = lambda^(i)
+  Sigma_inverse[len-i,len-i] = lambda^(i)
+}
+big_f = solve(t(x) %*% Sigma_inverse %*% x)
+h = t(x) %*% Sigma_inverse %*% prices
+hat_theta = big_f %*% h
+
+line = x %*% hat_theta
+
+#predictions
+L = matrix(1,2,2) #transition matrix
+L[1,2] = 0
+f_now = matrix(1,2,1) #f(0)
+f_now[2] = 0
+predicts_local_trend = matrix(t(f_now)%*%hat_theta,1,1)
+for(i in 1:8){
+  f_now = L%*%f_now
+  pred = t(f_now)%*%hat_theta
+  predicts_local_trend = cbind(predicts_local_trend, pred)
+}
+
+t = 2015 + 0.25*(length(predicts_local_trend)) # 2017
+years_predicted = seq(from=2015,to=t-0.25,by=0.25)
+
+plot(years, prices, xlim = c(1991,2016.5))
+lines(years, line, col="blue",lwd=2)
+lines(years_predicted, predicts_local_trend, lty=3,col="red",lwd=2)
+
+#variance calculation of the hat_theta
+sigma_squared = (t((prices - x %*% hat_theta)) %*%Sigma_inverse %*% (prices - x %*% hat_theta)) %/% (10-2)
+
+f_now = matrix(1,2,1) #f(0)
+f_now[2] = 0
+f_now = L%*%f_now #f at 93+1
+variance_hat_theta = sigma_squared %*% (1 + t(f_now)%*%solve(big_f)%*%f_now)
+
+std_local_trend = sqrt(sigma_squared)
+added <- std_local_trend[1,1]
+lines(years_predicted, predicts_local_trend+added,col="green",type="l", lty=2, lwd=1)
+lines(years_predicted, predicts_local_trend-added,col="green",type="l", lty=2, lwd=1)
+```
+
+The predictions are:
+
+\begin{tabular}{l | l | l | l | l | l | l | l |l}
+  2015 & 2015.25 & 2015.5 & 2015.75 & 2016 & 2016.25 & 2016.5 & 2016.75 & 2017\\
+  \hline
+  23957.58 & 24081.9 & 24206.21 & 24330.53 & 24454.85 & 24579.17 & 24703.49 & 24827.81 & 24952.13\\\
+\end{tabular}
+
+Now we can estimate sigma and the variance of the error:
+$$\hat{\sigma^{2}} = (Y - x_{N}\hat{\theta}_{6})^{T}\Sigma_{-1}(Y - x_{N}\hat{\theta}_{6})/(T-p) = 7935751 $$
+$$Var(\epsilon_{93}) = \hat{\sigma^{2}}(1 + f^{T}(l)(F_{6})^{-1}f(l) = 12183640025$$
+
+In this model we can see how the last measurments have more impact on the trend than the model build in the question 1.3. This result in more accurate predictions.
+
+#Question 7 
+\textit{Comment on the results. Which model do you prefer? Do you trust the forecasts?
+Do you have ideas for extending the forecast method?}
+
+In the graphic we can see the GLM(blue), the simple local smoothing(red) and local trend with exponential smoothing(green).
+
+```{r ploooot, echo=FALSE}
+plot(years, prices)
+lines(years, y ,col="blue",lwd=2)
+lines(years, estimated_price_09[1:93],col="red",lwd=2)
+lines(years, line,col="green",lwd=2)
+error_GLM = prices - y
+error_simple_smoothing = prices - estimated_price_09[1:93] 
+error_local_trend = prices - line
+std_errors_GLM = sd(error_GLM, na.rm = FALSE)
+std_errors_simple = sd(error_simple_smoothing, na.rm = FALSE)
+std_error_local_trend = sd(error_local_trend, na.rm = FALSE)
+```
+
+We can see clearly how the green line is going to give us better predictions. The simple exponential smoothing will give very low prediction, since it take some time to catch the trend.
+The GLM, will give us a very high prediction. The trend is distorted from the spike on 2006.
+
+This impact is much less with the local trend and exponential smoothing, thanks to the forgetting factor, without loosing the estimated trend.
+
+
+  

@@ -1,0 +1,9 @@
+function [x,lambda]=EqualityQPSolver(H,g,A,b)
+
+[r c]= size(A);
+KKT=[H,A;A',zeros(c,c)] ;
+RHS=[g;b] ;
+[L,D,p]= ldl(KKT,'vector') ;
+theta_est = L'\(D\(L\RHS(p)));
+x=theta_est(1:r) ;
+lambda=theta_est(length ( x )+1: l eng th ( x )+c ) ;

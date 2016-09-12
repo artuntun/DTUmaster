@@ -1,0 +1,177 @@
+---
+title: "Assignment 3"
+author: "Arturo Arranz Mateo"
+date: "March 30, 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+
+You can also embed plots, for example:
+
+```{r plotting, echo=FALSE}
+#Data 
+rm(list=ls())
+mydata = read.csv("/home/arturo/Documents/Time Series Analysis/Assignment3/A3_jagt_NOx.csv")
+
+#plot
+str(mydata)
+mydata$hour <-substr(as.character(mydata$Time),2,3)
+mydata$ctime <- as.POSIXlt(paste(as.character(mydata$Date),mydata$hour),format="%d-%m %H")
+trainData = mydata[1:696,]
+testData = mydata[697:744,]
+
+plot(trainData$ctime, trainData$NOx, type="l", col = "blue")
+
+
+(arima000 <- arima(trainData$NOx, c(0, 1, 0),seasonal = list(order = c(0, 1, 1), period = 24)))
+plot(trainData$ctime ,arima000$residuals, type="l", col = "green")
+acf(arima000$residuals)
+pacf(arima000$residuals)
+
+prediction = predict(arima000,48)
+
+plot(testData$ctime, testData$NOx, ylim = c(-100,200))
+
+
+lines(testData$ctime ,prediction$pred, col="green")
+lines(testData$ctime ,prediction$pred-prediction$se, col="red")
+lines(testData$ctime ,prediction$pred+prediction$se, col="red")
+
+```
+From the raw data plotting we can infer the following observations:
+- There is not a general trend
+- Looks like there is a 24 hours seasonality
+
+If we want to look closer, we can subplot each week
+```{r plotting1, echo=FALSE}
+plot(mydata$ctime[1:168], mydata$NOx[1:168], type="l", col = "blue")
+plot(mydata$ctime[168:336], mydata$NOx[168:336], type="l", col = "blue")
+plot(mydata$ctime[336:504], mydata$NOx[336:504], type="l", col = "blue")
+plot(mydata$ctime[504:744], mydata$NOx[504:744], type="l", col = "blue")
+```
+Here the seasonality and day-trend is more obvious. However, we can see that the 3th week data is far from stationary.
+
+We can applay some transformations, like one time differentation:
+```{r plotting2, echo=FALSE}
+plot(mydata$ctime[337:504], diff(mydata$NOx[336:504]), type="l", col = "blue")
+```
+Now we can see that the mean is constant, and we have remove the trend.
+However, the variance do not seem constant throught all the data.
+
+We can applay a logarithmic transformation before differencing.
+```{r plotting6, echo=FALSE}
+plot(mydata$ctime[337:504], diff(log(mydata$NOx[336:504])), type="l", col = "blue")
+#qqnorm(diff(log(mydata$NOx)))
+#qqline(diff(log(mydata$NOx)))
+
+#qqnorm(diff(log(mydata$NOx),6));
+#qqline(diff(log(mydata$NOx),6));
+```
+Now the data seems much more stationary. However we still can clearly see a strong correlation between consecutive samples. For filtering that correaltion we will use the ARMA model.
+
+Here is how the whole data looks after both transformations:
+```{r plotting5, echo=FALSE}
+plot(mydata$ctime[-1], diff(log(mydata$NOx)), type="l", col = "blue")
+```
+
+
+## Question2
+
+ACF and PACF
+```{r pacf1, echo=FALSE}
+acf(trainData$NOx)
+pacf(trainData$NOx)
+```
+
+ACF and PACF with log and differentation transformations
+```{r pacf2, echo=FALSE}
+acf(diff(log(trainData$NOx)))
+pacf(diff(log(trainData$NOx)))
+```
+
+
+## Question3
+```{r pressure, echo=FALSE}
+(arima111 <- arima(log(trainData$NOx), c(1, 1, 2),seasonal = list(order = c(0, 1, 0), period = 24)))
+(arima211 <- arima(log(trainData$NOx), c(1, 1, 1),seasonal = list(order = c(1, 1, 1), period = 24)))
+(arima110 <- arima(log(trainData$NOx), c(1, 1, 0),seasonal = list(order = c(1, 1, 0), period = 24)))
+(arima210 <- arima(log(trainData$NOx), c(2, 1, 0),seasonal = list(order = c(2, 1, 0), period = 24)))
+predictions = predict(arima111,48)
+plot(trainData$ctime ,arima111$residuals, type="l", col = "green")
+
+
+qqnorm(arima112$residuals)
+qqline(arima112$residuals)
+acf(arima112$residuals)
+pacf(arima112$residuals)
+
+qqnorm(arima211$residuals)
+qqline(arima211$residuals)
+qqnorm(arima110$residuals)
+qqline(arima110$residuals)
+qqnorm(arima210$residuals)
+qqline(arima210$residuals)
+
+plot(testData$ctime, testData$NOx)
+lines(testData$ctime ,2.718^predict(arima000,48)$pred, col="green")
+lines(testData$ctime ,2.718^predict(arima211,48)$pred, col="red")
+lines(testData$ctime ,2.718^predict(arima110,48)$pred, col="blue")
+lines(testData$ctime ,2.718^predict(arima210,48)$pred, col="pink")
+
+
+
+NOx <- as.matrix(mydata[3])
+tday <- seq(from=24, to=1)
+NOxday <- matrix(NOx, ncol = 24, byrow = TRUE) #reshape into day rows
+
+
+
+(fit <- arima(log(NOx), c(0, 1, 1),seasonal = list(order = c(0, 1, 1), period = 24)))
+predict(fit,10)
+plot(mydata$NOx, type="l")
+#First day plot
+plot(tday, NOxday[1,])
+plot(tday, NOxday[31,])
+plot(tday, NOxday[2,])
+plot(tday, NOxday[,])
+plot(tday, NOxday[5,])
+plot(tday, NOxday[6,])
+
+acf(log(NOx))
+pacf(log(NOx))
+
+acf(NOx)
+pacf(NOx)
+
+acf(diff(NOx,lag=1))
+pacf(diff(NOx,lag=1))
+
+
+
+pred <- predict(fit, n.ahead = 2*24)
+ts.plot(NOx,2.718^pred$pred, log = "y", lty = c(1,3))
+
+time <- ts(1:length(mydata$NOx), frequency = 24)
+#The complete serie plotting
+plot(time, mydata$NOx,col="green",type="l", lty=2, lwd=1)
+plot(time, log(NOx),col="green",type="l", lty=2, lwd=1)
+plot(diff(NOx,lag=1),col="green",type="l", lty=2, lwd=1)
+
+dates <- seq(as.Date("14/03", format = "%d/%m"),by = "days", length = length(mydata$NOx)/24)
+plot(time,NOx,col="green",type="l", lty=2, lwd=1)
+axis(1, at=seq(1, length(mydata$NOx), by = 24), labels=dates)
+require(ggplot2)
+theme_set(theme_bw()) # Change the theme to my preference
+ggplot(aes(x = time, y = variable), data = mydata) + geom_point()
+
+
+t = seq(length(NOx))
+plot(timets,NOx)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

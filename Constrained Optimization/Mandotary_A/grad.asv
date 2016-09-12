@@ -1,0 +1,4 @@
+function gk=grad(H,c,xk)
+
+gk = 
+end
