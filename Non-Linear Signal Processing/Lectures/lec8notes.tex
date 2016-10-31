@@ -1,0 +1,18 @@
+\documentclass{article}
+\usepackage[margin=1.4in]{geometry}
+
+\begin{document}
+
+The main difficulty with EM optimization is the constraints such as the sum
+of $\pi$ should be 1 and the covariances should be semidefinte positive as well as symmetric. 
+
+comments on ex7. K-means is not a Gaussian mixture. K-means do not have likelihood function. This
+make testing the performance harder. For checkpoint 7.2 It is nice to make a graph Etrain vs K(complexity). Run the program for several K values. It is easy to check if one of the gaussians is not relevant( if Pi < 1/N) less than a sample is explained by that gaussian. 
+If you plot the Cost(J) vs complexity you should see how suddenly the cost is drop drastically. In that case the heuristic should be choose the K after the drop. 
+Also, the thing. 
+
+from bishop, for fixing a mixture of gaussinas, first we should run k means to know how many clusters do we need. 
+ 
+
+
+\end{document}

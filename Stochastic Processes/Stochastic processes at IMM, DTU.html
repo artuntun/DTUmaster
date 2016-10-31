@@ -1,0 +1,960 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0037)http://www2.imm.dtu.dk/courses/02407/ -->
+<html class="gr__www2_imm_dtu_dk"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>
+Stochastic processes at IMM, DTU
+</title>
+<style type="text/css">
+  body { margin-top: 5 %; margin-left: 5%; margin-right: 5% }
+</style>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+
+<body data-gr-c-s-loaded="true" data-feedly-mini="yes">
+
+<h1>Course 02407:
+Stochastic
+processes Fall 2016</h1>
+
+<p>
+Lecturer and instructor: Associate Professor Bo Friis Nielsen<br>  
+Instructor:
+Phd student Oscar Peralta
+Gutierrez
+<!-- 
+Gutiérrz
+-->
+and 
+Phd student Azucena Campillo Navarro (30/8)
+     <br>  
+Contact: <a href="mailto:bfn@imm.dtu.dk">bfn@imm.dtu.dk</a>
+</p>
+
+
+
+
+<p>
+<b>Textbook</b>: Mark A. Pinsky and Samuel Karlin
+<em>
+<a href="http://www.polyteknisk.dk/home/Detaljer/9780123814166">
+<!-- 
+<"http://www.polyteknisk.dk/home/Detaljer/9780198572220">
+-->
+An Introduction to Stochastic Modelling</a>
+</em> - can be bought at <a href="http://www.polyteknisk.dk/butik/">Polyteknisk Boghandel</a>,
+DTU.  The bookstore offers a 10% discount off the announced price.
+</p>
+
+<p><b>Lectures</b> are held in building 321, room 033,
+Tuesdays between 8.15 to  12 (E3A).
+Lectures will be intertwined with
+<b>Exercises </b> and <b>Problems</b>.
+</p>
+
+<hr>
+
+<!-- 
+-->
+<h3>Course plan: </h3>
+
+<ul type="disc">
+ <li>Lecture 1 - August 30: <b>Markov Chains: Introduction</b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 3.1-3.5 </li>
+ <li>A set of slides recapitulating basic probability 
+ <a href="http://www2.imm.dtu.dk/courses/02407/slides/ProbRecap.pdf">here</a>, for printing 
+ <a href="http://www2.imm.dtu.dk/courses/02407/slides/ProbRecap-2x2.pdf">here</a>. 
+ </li><li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide1.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide1m.pdf">printable
+      slides (draft)</a> in pdf </li>
+      <li>
+ <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exprob1.pdf"> Exercises and problems from Pinsky &amp; Karlin </a>.
+ </li><li> In class exercises: KP 3.1.1, KP 3.2.1, KP 3.4.1, KP 3.4.2, (KP 3.1.4), (KP 3.2.4), (KP 3.4.6).
+ <a href="http://www2.imm.dtu.dk/courses/02407/exercises/ex31.pdf"> KP exercises 3.1 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/exercises/prob31.pdf"> KP problems 3.1 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exprob3234.pdf"> KP exercises and problems 3.2 and 3.4 </a>,
+</li><li> In class problems: 
+<!-- 
+ KP 3.1.4, KP 3.2.1, KP 3.4.4, (KP 3.2.5), (KP 3.4.7).
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_1_4.pdf"> KP 3.1.4 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_2_1.pdf"> KP 3.2.1 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_4_4.pdf"> KP 3.4.4 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_2_5.pdf"> (KP 3.2.5) </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_4_7.pdf"> (KP 3.4.7) </a>.
+ </li><li>Problems for self study:
+<!-- 
+ KP 3.1.1, KP 3.2.3, KP 3.4.12, (KP 3.5.2).
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_1_1.pdf"> KP 3.1.1 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_2_3.pdf"> KP 3.2.3 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_4_12.pdf"> KP 3.4.12 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_5_2.pdf"> (KP 3.5.2) </a>.
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 2 - September 6: <b>Markov Chains: Random walk, First Step Analysis, Branching Processes</b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 3.6-3.9 </li>
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide2.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide2m.pdf">printable
+      slides (draft)</a> in pdf </li>
+<!-- 
+-->
+ <li> In class exercises: KP 3.6.1, KP 3.7.1, KP 3.9.2.
+</li><li> In class problems:
+<!-- 
+KP 3.6.7, KP 3.8.3, (KP 3.9.4), (KP 3.7.1).
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exprob36.pdf"> KP exercises and problems 3.6 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exprob37.pdf"> KP exercises and problems 3.7 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exprob38.pdf"> KP exercises and problems 3.8 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exprob39.pdf"> KP exercises and problems 3.9 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_6_7.pdf"> KP 3.6.7 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_8_3.pdf"> KP 3.8.3 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_9_4.pdf"> (KP 3.9.4) </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_7_1.pdf"> (KP 3.7.1) </a>.
+<!-- 
+-->
+ </li><li>Problems for self study:
+<!-- 
+(KP3.6.2 [derive equations 3.65 only and discuss how you think the non-zero value of r will effect the mean time to absorption]), KP 3.7.4, KP 3.8.2, KP 3.9.7.
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_6_2.pdf"> KP 3.6.2 </a> ([derive equations 3.65
+ only and discuss how you think the non-zero value of r will effect
+ the mean time to absorption]),
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_7_4.pdf"> KP 3.7.4 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_8_2.pdf"> KP 3.8.2 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp3_9_7.pdf"> KP 3.9.7 </a>.
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 3 - September 13: <b>Markov Chains: Limiting and invariant distributions, classification of states and chains </b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 4.1,(4.2),4.3,4.4,(4.5) </li>
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide3.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide3m.pdf">printable
+      slides (draft)</a> in pdf </li>
+ <li> In class exercises: KP 4.1.1, KP 4.3.1, KP 4.4.2, (KP 4.3.2).
+</li><li> In class problems:
+<!-- 
+KP 4.1.1, KP 4.3.3, (KP 4.1.13), (KP 4.4.7).
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp4_1_1.pdf"> KP 4.1.1 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp4_3_3.pdf"> KP 4.3.3 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp4_1_13.pdf"> (KP 4.1.13) </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp4_4_7.pdf"> (KP 4.4.7 - to be simplified) </a>.
+ </li><li>Problems for self study:
+<!-- 
+ KP 4.1.12, KP 4.3.2, KP 4.4.3.
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp4_1_12.pdf"> KP 4.1.12 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp4_3_2.pdf"> KP 4.3.2 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp4_4_3.pdf"> KP 4.4.3 </a>.
+<!-- 
+ <a href="solutions/kp4_1_2.pdf"> KP 4.1.2 </a> old - too many
+ <a href="solutions/kp4_2_6.pdf"> KP 4.2.6 </a>,
+ <a href="solutions/kp4_2_7.pdf"> KP 4.2.7 </a>,
+ <a href="solutions/kp4_4_1.pdf"> KP 4.4.1 </a>,
+ <a href="solutions/kp4_5_2.pdf"> KP 4.5.2 </a>,
+-->
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 4 - September 20: <b>
+ Poisson Processes
+ </b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 5.1-5.6 (5.2.2,5.4.2 can be omitted) </li>
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide4.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide4m.pdf">printable
+      slides (draft)</a> in pdf </li>
+ <li> In class exercises: KP 5.1.1, KP 5.3.2, KP 5.5.1.
+</li><li> In class problems: 
+<!-- 
+KP 5.3.7, KP 5.1.9, KP 5.2.6, (KP 5.4.8), (KP 5.3.9), (KP 5.6.3).
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_3_7.pdf"> KP 5.3.7 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_1_9.pdf"> KP 5.1.9 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_2_6.pdf"> KP 5.2.6 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_4_8.pdf"> (KP 5.4.8) </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_3_9.pdf"> (KP 5.3.9) </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_6_3.pdf"> (KP 5.6.3) </a>.
+ </li><li>Problems for self study:
+<!-- 
+ KP 5.1.7, KP 5.5.6, KP 5.4.7.
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_1_7.pdf"> KP 5.1.7 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_4_7.pdf"> KP 5.4.7 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp5_5_6.pdf"> KP 5.5.6 </a>.
+<!-- 
+ <li>Problems:
+ <a href="solutions/kp5_1_1.pdf"> KP 5.1.2 </a>, old
+ <a href="solutions/kp5_1_2.pdf"> KP 5.1.3 </a>
+ <a href="solutions/kp5_1_4.pdf"> KP 5.1.4 </a>,
+ <a href="solutions/kp5_3_6.pdf"> KP 5.3.6 </a>,
+ <a href="solutions/kp5_4_1.pdf"> KP 5.4.1 </a>,
+ <a href="solutions/kp5_6_7.pdf"> KP 5.6.7 </a>.
+-->
+<!-- 
+-->
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 5 - September 27: <b>
+ Birth and Death Processes
+ </b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 6.1-6.3 </li>
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide5.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide5m.pdf">printable
+      slides (draft)</a> in pdf </li>
+ <li> In class exercises: 6.1.2, 6.2.2, 6.3.1.
+<!-- 
+-->
+</li><li> In class problems: 
+<!-- 
+KP 6.2.1, KP 6.2.3, KP 6.3.2, (KP 6.3.3).
+-->
+<!-- Exercises didn't work out very well, change, e.g. 6_2_1 and 6_3_3
+ <a href="solutions/kp6_1_3.pdf"> KP 6.1.3 </a>
+probably better though more difficult! 6_1_3, 6_2_3, 6_3_2 not good!
+maybe one of the could survive (forgot to change, worked much better
+this year (2014) still need to consider
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_2_1.pdf"> KP 6.2.1 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_2_3.pdf"> KP 6.2.3 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_3_2.pdf"> KP 6.3.2 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_3_3.pdf"> (KP 6.3.3) </a>.
+<!-- 
+-->
+ </li><li>Problems for self study:
+<!-- 
+ KP 6.1.2, KP 6.2.4, (KP 6.3.4).
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_1_2.pdf"> KP 6.1.2 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_2_4.pdf"> KP 6.2.4 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_3_4.pdf"> (KP 6.3.4) </a>,
+<!-- 
+ <li>Problems:  KP6.1.2, KP6.1.3, KP6.1.4, KP6.2.1, KP6.2.3, KP6.2.4, KP6.3.1, KP6.3.2, KP6.3.4, KP6.2.6, KP6.3.3.
+ <a href="solutions/kp6_1_4.pdf"> KP 6.1.4 </a>,
+ <a href="solutions/kp6_3_1.pdf"> KP 6.3.1 </a>,
+ <a href="solutions/kp6_2_6.pdf"> KP 6.2.6 </a>,
+-->
+<!-- 
+-->
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 6 - October 4: <b>
+ Limiting behaviour of Birth and Death Processes, Finite State Continuous Time Markov Chains
+ </b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 6.4-6.6,(6.7) </li>
+<!-- 
+ <li>Additional Reading: <a href="lectnotes/memap.pdf">Bladt & Nielsen Chapter 2</a></li>
+-->
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide6.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide6m.pdf">printable
+      slides (draft)</a> in pdf </li>
+<!-- 
+-->
+<!-- 
+ <li> In class exercises:
+-->
+<li> In class problems: 
+<!-- 
+ KP6.4.2, KP 6.5.2, <a href="exercises/exercise27.pdf">Exercise 27</a>.
+-->
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_4_2.pdf"> KP 6.4.2 </a>,
+ <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_5_2.pdf"> KP 6.5.2 </a>,
+    <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise27.pdf">Exercise 27</a>,
+    (<a href="http://www2.imm.dtu.dk/courses/02407/solutions/solex27.pdf">solution</a>).
+<!-- 
+-->
+ </li><li>Problems for self study:
+<!-- 
+ KP6.4.4, <a href="exercises/exercise30.pdf">Exercise 30</a>,
+-->
+    <a href="http://www2.imm.dtu.dk/courses/02407/solutions/kp6_4_4.pdf"> KP 6.4.4 </a>,
+    <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise30.pdf">Exercise 30</a>,
+    (<a href="http://www2.imm.dtu.dk/courses/02407/solutions/solex30.pdf">solution</a>).
+<!-- 
+-->
+
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 7 - October 18: <b>
+ Renewal Phenomena
+ </b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 7.1,(7.2),7.3-7.6 </li>
+<!-- 
+ <li>Additional Reading: <a href="lectnotes/memap.pdf">Bladt & Nielsen Chapter 4</a></li>
+-->
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide7.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide7m.pdf">printable
+      slides (draft)</a> in pdf </li>
+ <li> In class exercises:
+KP 7.2.1, KP 7.4.1.
+<!-- 
+ KP 3.1.1, KP 3.2.1, KP 3.4.1, KP 3.4.2, (KP 3.1.4), (KP 3.2.4), (KP 3.4.6).
+-->
+</li><li> In class problems:
+ KP 7.6.1,
+<!-- 
+ <a href="solutions/kp7_6_1.pdf"> KP 7.6.1 </a>,
+-->
+    <a href="http://www2.imm.dtu.dk/courses/02407/exercises/wolff2_9.pdf">2.9</a>
+    from Wolff
+<!-- 
+    (<a href="solutions/ex2_9.pdf">solution</a>),
+-->
+    <a href="http://www2.imm.dtu.dk/courses/02407/exercises/wolff2_19.pdf">2.19</a>
+    from Wolff,
+<!-- 
+    (<a href="solutions/ex2_19.pdf">solution</a>),
+-->
+    <a href="http://www2.imm.dtu.dk/courses/02407/exercises/wolff2_33.pdf">2.33</a>
+    from Wolff.
+<!-- 
+    (<a href="solutions/ex2_33.pdf">solution</a>).
+-->
+ </li><li>Problems for self study:
+KP 7.3.5, KP 7.5.4.
+<!-- 
+ <a href="solutions/kp7_3_5.pdf"> KP 7.3.5 </a>,
+ <a href="solutions/kp7_5_4.pdf"> KP 7.5.4 </a>.
+-->
+<!-- 
+-->
+<!-- 
+ <li>Problems: 
+ KP7.1.3, KP7.2.1,
+-->
+<!-- 
+ <a href="solutions/kp7_1_3.pdf"> KP 7.1.3 </a>,
+ <a href="solutions/kp7_2_1.pdf"> KP 7.2.1 </a>,
+-->
+ </li></ul>
+</ul>
+
+<hr>
+<p>
+The course plan is tentative. Updates and material will be provided.
+The following material is from the fall semester of 2015. Some
+adjustments are likely.
+</p>
+<hr>
+
+<ul type="disc">
+ <li>Lecture 8 - October 25: <b>Phase-type distributions</b></li>
+ <ul type="circle">
+ <li>Reading: <a href="http://www2.imm.dtu.dk/courses/02407/lectnotes/ftf.pdf">note</a></li>
+ <li>Additional Reading:
+<!-- 
+ <a href="lectnotes/memap.pdf">
+-->
+ Bladt &amp; Nielsen Chapter 3, 6, and 7 (hand-outs on request)</li>
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide8m1.pdf">Slide show(DRAFT!)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide8m.pdf">printable
+      slides(DRAFT!)</a> in pdf</li>
+<!-- 
+ <li> In class exercises:
+ KP 3.1.1, KP 3.2.1, KP 3.4.1, KP 3.4.2, (KP 3.1.4), (KP 3.2.4), (KP 3.4.6).
+-->
+<li> In class problems: 
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise1.pdf">1</a>
+<!--
+   (<a href="solutions/solex1.pdf">solution</a>),
+-->
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise2.pdf">2</a>
+<!--
+   (<a href="solutions/solex2.pdf">solution</a>), 
+-->
+<!--
+-->
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise14.pdf">14</a>,
+<!--
+   (<a href="solutions/solex14.pdf">solution</a>),
+-->
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise19.pdf">19</a>.
+<!--
+   (<a href="solutions/solex19.pdf">solution</a>). 
+-->
+ </li>
+ </ul>
+<!-- 
+ KP 3.1.4, KP 3.2.1, KP 3.4.4, (KP 3.2.5), (KP 3.4.7).
+-->
+ <li>Problems for self study:
+<!-- 
+ KP 4.1.12, KP 4.3.2, KP 4.4.3.
+-->
+</li></ul>
+
+<ul type="disc">
+ <li>Lecture 9 - November 1: <b>Phase-type distributions </b></li>
+ <ul type="circle">
+ <li>Reading: <a href="http://www2.imm.dtu.dk/courses/02407/lectnotes/ftf.pdf">note</a></li>
+ <li>Additional Reading:
+<!-- 
+ <li  >Lecture 9 - November 4 David Meisch: <b>Phase-type distributions, Conditional Probability and Expectation, Martingales</b></li>
+ <a href="lectnotes/memap.pdf">
+-->
+ Bladt &amp; Nielsen Chapter 3, 6, and 7 (hand-outs on request)</li>
+<!-- 
+ <li>Reading: Pinsky & Karlin 2.1-2.5 </li>
+-->
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide9.pdf">Slide show(DRAFT!)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide9m.pdf">printable
+      slides(DRAFT!)</a> in pdf</li>
+<!-- 
+ <li> In class exercises:
+ KP 3.1.1, KP 3.2.1, KP 3.4.1, KP 3.4.2, (KP 3.1.4), (KP 3.2.4), (KP 3.4.6).
+-->
+<li> In class problems: 
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise14.pdf">14</a>,
+<!--
+   (<a href="solutions/solex14.pdf">solution</a>),
+-->
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise19.pdf">19</a>,
+<!--
+   (<a href="solutions/solex19.pdf">solution</a>). 
+-->
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise13.pdf">13</a>,
+<!--
+   (<a href="solutions/solex13.pdf">solution</a>),
+-->
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise26.pdf">26</a>,
+<!--
+   (<a href="solutions/solex26.pdf">solution</a>). 
+-->
+<!-- 
+ KP 3.1.4, KP 3.2.1, KP 3.4.4, (KP 3.2.5), (KP 3.4.7).
+-->
+ </li><li>Problems for self study:
+<!-- 
+ KP 4.1.12, KP 4.3.2, KP 4.4.3.
+ <li>Exercises: 
+-->
+   Exercise
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise21.pdf">21</a>,
+<!--
+   (<a href="solutions/solex21.pdf">solution</a>),
+-->
+   <a href="http://www2.imm.dtu.dk/courses/02407/exercises/exercise11.pdf">11</a>,
+<!--
+   (<a href="solutions/solex11.pdf">solution</a>). 
+-->
+<!--
+ KP2.4.3, KP2.4.7, KP2.4.8,
+KP2.5.1, KP2.5.5, KP2.5.4, KP2.5.3
+-->
+<!--
+ <a href="solutions/kp2_4_3.pdf"> KP 2.4.3 </a>,
+ <a href="solutions/kp2_4_7.pdf"> KP 2.4.7 </a>,
+ <a href="solutions/kp2_4_8.pdf"> KP 2.4.8 </a>,
+ <a href="solutions/kp2_5_1.pdf"> KP 2.5.1 </a>,
+ <a href="solutions/kp2_5_5.pdf"> KP 2.5.5 </a>,
+ <a href="solutions/kp2_5_4.pdf"> KP 2.5.4 </a>,
+ <a href="solutions/kp2_5_3.pdf"> KP 2.5.3 </a>,
+-->
+<!--
+-->
+<!-- 
+-->
+<!-- 
+-->
+ </li>
+ </ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 10 - November 9: <b>
+ Queueing systems; basic and intermediate queueing theory
+ </b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 9.1-9.3 </li>
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide10.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide10m.pdf">printable
+      slides (draft)</a> in pdf </li>
+<!-- 
+ <li> In class exercises:
+ KP 3.1.1, KP 3.2.1, KP 3.4.1, KP 3.4.2, (KP 3.1.4), (KP 3.2.4), (KP 3.4.6).
+-->
+<li> In class problems: 
+KP 9.2.2, KP 9.2.6, KP 9.2.4, KP 9.3.2.
+<!-- 
+ <a href="solutions/kp9_2_2.pdf"> KP 9.2.2 </a>,
+ <a href="solutions/kp9_2_6.pdf"> KP 9.2.6 </a>,
+ <a href="solutions/kp9_2_4.pdf"> KP 9.2.4 </a>,
+ <a href="solutions/kp9_3_2.pdf"> KP 9.3.2 </a>.
+-->
+ </li><li>Problems for self study:
+KP 9.2.5, KP 9.2.7, KP 9.3.1
+<!-- 
+ <a href="solutions/kp9_2_5.pdf"> KP 9.2.5 </a>,
+ <a href="solutions/kp9_2_7.pdf"> KP 9.2.7 </a>,
+ <a href="solutions/kp9_3_1.pdf"> KP 9.3.1 </a>,
+ <li>Problems: 
+-->
+<!-- 
+KP9.1.1, KP9.2.2, KP9.2.3, KP9.2.4, KP9.2.5, KP9.2.6, KP9.2.7, KP9.3.1, KP9.3.2.
+ <a href="solutions/kp9_1_1.pdf"> KP 9.1.1 </a>,
+ <a href="solutions/kp9_2_3.pdf"> KP 9.2.3 </a>,
+-->
+<!--
+-->
+<!-- 
+-->
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 11 - November 15: <b>
+ Brownian Motion
+ </b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 8.1-8.2 </li>
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide11.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide11m.pdf">printable
+      slides (draft)</a> in pdf </li>
+      <a href="http://www.youtube.com/watch?v=pdz7wFHSLD0"> Small movie with Brownian motion</a>
+ <li> In class exercises:
+ KP 8.1.1, KP 8.2.1,  KP 8.1.4, (KP 8.1.6), ((KP 8.1.5)).
+<!-- 
+-->
+</li><li> In class problems: 
+ KP 8.1.1, KP 8.1.2, KP 8.1.7, KP 8.2.1, KP 8.2.4.
+<!-- 
+ <a href="solutions/kp8_1_1.pdf"> KP 8.1.1 </a>,
+ <a href="solutions/kp8_1_2.pdf"> KP 8.1.2 </a>,
+ <a href="solutions/kp8_1_7.pdf"> KP 8.1.7 </a>,
+ <a href="solutions/kp8_2_1.pdf"> KP 8.2.1 </a>,
+ <a href="solutions/kp8_2_4.pdf"> KP 8.2.4 </a>,
+-->
+ </li><li>Problems for self study:
+Surplus exercises and problems from "In class".
+<!-- 
+-->
+<!-- 
+ <li>Problems: 
+-->
+<!--
+-->
+<!-- 
+-->
+<!-- 
+-->
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 12 - November 22: <b>
+ Brownian Motion with Drift and Variations and Extensions
+ </b></li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 8.3-8.4 </li>
+ <li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide12.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide12m.pdf">printable
+      slides (draft)</a> in pdf </li>
+ <li> In class exercises:
+<!-- 
+-->
+</li><li> In class problems: 
+ KP8.3.3, (KP8.3.6), KP8.4.1, KP8.4.2, (KP8.4.5), KP8.4.6.
+<!-- 
+ <a href="solutions/kp8_3_3.pdf"> KP 8.3.3 </a>,
+ <a href="solutions/kp8_3_6.pdf"> (KP 8.3.6) </a>,
+ <a href="solutions/kp8_4_1.pdf"> KP 8.4.1 </a>,
+ <a href="solutions/kp8_4_2.pdf"> KP 8.4.2 </a>,
+ <a href="solutions/kp8_4_5.pdf"> (KP 8.4.5) </a>,
+ (<a href="solutions/kp8_4_6.pdf"> KP 8.4.6 </a>).
+-->
+ </li><li>Problems for self study:
+KP8.3.1, KP8.4.4, KP8.4.10,
+<!-- 
+ <a href="exercises/bw1exercise.pdf"> Brownian motion </a>.
+ <a href="solutions/kp8_3_1.pdf"> KP 8.3.1 </a>,
+ <a href="solutions/kp8_4_4.pdf"> KP 8.4.4 </a>,
+ <a href="solutions/kp8_4_10.pdf"> KP 8.4.10 </a>.
+-->
+<!-- 
+-->
+<!-- 
+-->
+ </li></ul>
+</ul>
+
+<ul type="disc">
+ <li>Lecture 13 - November 30: <b>
+ The Ornstein-Uhlenbeck Process and
+ General course overview
+<!-- 
+ Queueing systems; variations, extensions, and networks
+-->
+ </b>
+ </li> 
+ <ul type="circle">
+ <li>Reading: Pinsky &amp; Karlin 8.5 </li>
+<li> In class problems: 
+ KP8.5.1, KP8.5.2.
+<!-- 
+ <a href="solutions/kp8_5_1.pdf"> KP 8.5.1 </a>.
+ <a href="solutions/kp8_5_2.pdf"> KP 8.5.2 </a>.
+-->
+ </li><li><a href="http://www.imm.dtu.dk/courses/02407/slides/slide13.pdf">Slide show (draft)</a> in pdf, <a href="http://www.imm.dtu.dk/courses/02407/slides/slide13m.pdf">printable
+      slides (draft)</a> in pdf </li>
+<!-- 
+-->
+<!-- 
+ <li>Problems: 
+-->
+ </ul>
+</ul>
+
+<!-- 
+ <a href="http://www.imm.dtu.dk/courses/02407/take_home_exam12.pdf">Take home exam from fall 2012</a>
+-->
+
+<hr>
+
+<!--
+<ul type=disc>
+<li  >Lecture 13 - November 29: <b>Markov Chain Monte Carlo - MCMC </b></li>
+ <ul type=circle>
+ <li>Reading: G & S  section 6.14 pp.291-296,  (copies or alternative will be provided)
+ </li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide11.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide11m.pdf">printable
+      slides</a> in pdf</li>
+ <li>Exercises: 
+*** Some updates to exercises still possible ***  <br />
+   Exercise
+   <a href="exercises/exercise34.pdf">34</a>,
+   (<a href="solutions/solex31.pdf">solution</a>). 
+ </li>
+ </li>
+ </ul>
+</ul>
+-->
+
+<!-- 
+<ul type=disc>
+ <li  >Lecture 3 - September 14: <b>Discrete time Markov Chains, classification of states </b></li> 
+ <ul type=circle>
+ <li>Reading: G & S section 6.1, 6.2, 6.3 </li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide3.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide3m.pdf">printable
+      slides</a> in pdf </li>
+ <li>Exercises: 
+ <a href="solutions/gs6_1_2.pdf">GS 6.1.2</a>,
+   Problem 
+   <a href="exercises/wolff3_1.pdf">3.1</a>
+   from Wolff
+   (<a href="solutions/ex3_1.pdf">solution</a>), 
+   Problem 
+   <a href="exercises/wolff3_20.pdf">3.20</a>
+   from Wolff
+   (<a href="solutions/ex3_1.pdf">solution</a>), 
+ <a href="solutions/gs6_15_1.pdf">GS 6.15.1</a>,
+ <a href="solutions/gs6_2_3.pdf"> GS 6.2.3</a>,
+ <a href="solutions/gs6_3_2.pdf">GS 6.3.2</a>.
+ </li>
+
+ </ul>
+</ul>
+
+
+<ul type=disc>
+ <li  >Lecture 4 - September 21:  David Meisch: <b>DTMC - Invariant probabilities and reversible chains </b></li>
+ <ul type=circle>
+ <li>Reading: G & S 6.4,6.5 </li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide4.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide4m.pdf">printable
+      slides</a> in pdf</li>
+ <li>Exercises: 
+   Problem
+   <a href="exercises/wolff3_12.pdf">3.12</a>
+   from Wolff
+   (<a href="solutions/ex3_12.pdf">solution</a>), 
+   Exercise
+   <a href="exercises/exercise33.pdf">33</a>,
+   <a href="exercises/cursoSP.pdf"> Starter </a>
+   <a href="exercises/diag_lucy.jpg"> with related picture </a> <br />
+   Exercise
+   <a href="exercises/exercise28.pdf">28</a>
+   (<a href="solutions/solex28.pdf">solution</a>), 
+   Exercise
+   <a href="exercises/exercise10.pdf">10</a>
+   (<a href="solutions/solex10.pdf">solution</a>). 
+   <a href="exercises/wolff3_44.pdf">3.44</a>
+   Problem from Wolff
+	   (<a href="solutions/ex3_44.pdf">solution</a>), 
+   <a href="exercises/wolff3_45.pdf">3.45</a>
+   Problem from Wolff
+   (<a href="solutions/ex3_45.pdf">solution</a>), 
+   <a href="exercises/wolff3_47.pdf">3.47</a>
+   Problem from Wolff
+   (<a href="solutions/ex3_47.pdf">solution</a>), 
+ </li>
+
+ </ul>
+</ul>
+-->
+
+<!--
+<ul type=disc>
+<li  >Lecture 5 - September 28: <b>Poisson and birth/death processes</b></li>
+ <ul type=circle>
+ <li>Reading: G & S  chapter 6.8, 6.9</li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide5.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide5m.pdf">printable
+      slides</a> in pdf</li>
+ <li>Exercises: 
+*** Some updates to exercises still possible ***  <br />
+   Exercise
+   <a href="solutions/gs6_8_1.pdf">GS 6.8.1</a>,
+   <a href="solutions/gs6_8_2.pdf">GS 6.8.2</a>,
+   <a href="exercises/procpoiSP.pdf">(extra Poisson Process exercise) </a>,
+   (solution <a href="solutions/procpoiSPSol.pdf">here</a>).
+   <a href="solutions/gs6_8_4.pdf"> GS 6.8.4</a>,
+   <a href="solutions/gs6_8_5.pdf"> GS 6.8.5</a>,
+   <a href="exercises/exercise10.pdf">10</a>
+   (<a href="solutions/solex10.pdf">solution</a>). 
+   <a href="exercises/uht-03.pdf">uht-03</a> 
+   (solution <a href="solutions/uht-sol-03.pdf">here</a>).
+ </li>
+ </li>
+ </ul>
+</ul>
+-->
+
+<!--
+<ul type=disc>
+<li  >Lecture 6 - October 5: <b>Continuous time Markov Chains</b></li>
+ <ul type=circle>
+ <li>Reading: G & S  section 6.9, (6.10), 6.11.</li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide6.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide6m.pdf">printable
+      slides</a> in pdf</li>
+ <li>Exercises: 
+ GS 6.9.1, </br>
+   Exercise
+   <a href="exercises/exercise29.pdf">29</a>
+   (<a href="solutions/solex29.pdf">solution</a>), 
+   <a href="exercises/exercise30.pdf">30</a>
+   (<a href="solutions/solex30.pdf">solution</a>),
+   <a href="exercises/exercise27.pdf">27</a>
+   (<a href="solutions/solex27.pdf">solution</a>). 
+ </li>
+ </ul>
+</ul>
+-->
+
+<!--
+<ul type=disc>
+<li  >Lecture 7 - October 12: Kristian Tjalfe Klinkby: <b>Continuous time Markov Chains and Queueing Theory
+</b></li>
+ <ul type=circle>
+ <li>Reading: G & S  section 6.9, (6.10), 6.11.
+Frederick S. Hillier and Gerald J. Lieberman ``Introduction to Operations Research'' McGraw-Hill 6-th edition. 14.8 Continuous-Time Markov chains p. 648-660, 15 Queueing Theory 15.1-15.6 p. 661-695.
+15.4 and 15.5 can be omitted. (Copies of Hillier and Lieberman were handed out October 5th)
+ </li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide7.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide7m.pdf">printable
+      slides</a> in pdf</li>
+ <li>Exercises: 
+   Exercise
+   Hillier and Lieberman
+   15.6-12
+   (<a href="solutions/hl15_6_12.pdf">sol.</a>),
+   15.6-20,
+   (<a href="solutions/hl15_6_20.pdf">sol.</a>),
+   15.6-21,
+   (<a href="solutions/hl15_6_21.pdf">sol.</a>),
+   15.6-31,
+   (<a href="solutions/hl15_6_31.pdf">sol.</a>),
+   15.6-32
+   (<a href="solutions/hl15_6_32.pdf">sol.</a>),
+   <a href="exercises/exercise27.pdf">27</a>,
+   (<a href="solutions/solex27.pdf">solution</a>). 
+ </li>
+ </li>
+ </ul>
+</ul>
+-->
+
+
+<!-- 
+<FONT SIZE=+2>MTlab <A HREF="http://mt-lab.pbworks.com/Second-Meeting-with-Advisory-Board"> two-day meeting </A> 10'th workshop </FONT>
+
+<ul type=disc>
+<li  >Lecture 9 - November 2: <b>Renewal processes </b></li>
+ <ul type=circle>
+ <li>Reading: G & S  section 10.1-10.3 (10.4-10.5) pp.412-423 (423-436), 
+ </li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide9.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide9m.pdf">printable
+      slides</a> in pdf</li>
+ <li>Exercises: 
+   Problem 
+   <a href="exercises/wolff2_9.pdf">2.9</a>
+   from Wolff
+   (<a href="solutions/ex2_9.pdf">solution</a>), 
+   Problem 
+   <a href="exercises/wolff2_19.pdf">2.19</a>
+   from Wolff
+   (<a href="solutions/ex2_19.pdf">solution</a>), 
+   Problem 
+   <a href="exercises/wolff2_33.pdf">2.33</a>
+   from Wolff
+   (<a href="solutions/ex2_33.pdf">solution</a>), 
+   <a href="exercises/renewalexer.pdf">some extra</a>
+   renewal exercises
+   (<a href="solutions/solutionrenewal.pdf">solution</a>),
+   Exercise
+   <a href="exercises/exercise4.pdf">4</a>,
+   (<a href="solutions/solex4.pdf">solution</a>). 
+ </li>
+ </li>
+ </ul>
+</ul>
+-->
+
+<!--
+<ul type=disc>
+<li  >Lecture 10 - November 9: <b>The M/G/1 queue </b></li>
+ <ul type=circle>
+ <li>Reading: G & S  section 11.1-11.3 pp.440-451, 
+Frederick S. Hillier and Gerald J. Lieberman ``Introduction to Operations Research'' McGraw-Hill 6-th edition. 15 Queueing Theory 15.7 p. 695-695.
+15.4 and 15.5 can be omitted. (Copies of Hillier and Lieberman were handed out October 5th)
+ </li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide10.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide10m.pdf">printable
+      slides</a> in pdf</li>
+ <li>Exercises: 
+   Hillier and Lieberman
+   15.7-5
+   (<a href="solutions/hl15_7_5.pdf">sol.</a>),
+   15.7-8,
+   (<a href="solutions/hl15_7_8.pdf">sol.</a>),
+   15.7-10,
+   (<a href="solutions/hl15_7_10.pdf">sol.</a>),
+   15.7-11,
+   (<a href="solutions/hl15_7_11.pdf">sol.</a>)
+ </li>
+ </li>
+ </ul>
+</ul>
+-->
+
+<!--
+<ul type=disc>
+<li  >Lecture 12 - November 23: <b>The G/M/1 queue </b></li>
+ <ul type=circle>
+ <li>Reading: G & S  section 11.4 pp.451-455, Section 10.5 pp.431--436
+ </li>
+ <li  ><a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide12.pdf">Slide show</a> in pdf, <a
+      href="http://www.imm.dtu.dk/courses/02407/slides/slide12m.pdf">printable
+      slides</a> in pdf</li>
+ <li>Exercises: 
+*** No exercises in class. Lectures will last until 10.30-11  <br />
+   Exercise
+   <a href="exercises/exercise11.pdf">11</a>,
+   (<a href="solutions/solex11.pdf">solution</a>),
+   <a href="exercises/exercise31.pdf">31</a>,
+   (<a href="solutions/solex31.pdf">solution</a>). 
+ </li>
+ </li>
+ </ul>
+ </ul>
+-->
+
+
+<!--
+<ul type=disc>
+ <li  >Lecture 13 - November 30: <b>Summary, conclusions,
+ outlook</b>
+ <ul type=circle>
+ <li>
+<a href="http://www.imm.dtu.dk/courses/02407/slides/slide13m.pdf">printable
+      slides</a> in pdf</li>
+<li> 
+<a href="http://www.imm.dtu.dk/courses/02407/slides/stochm1.pdf">supplementary
+      slides from MTlab meeting November 23rd in Aalborg</a> in pdf</li>
+      </li>
+ </ul>
+
+ </ul>
+-->
+
+<hr>
+<p><b>Deadline
+for reports on the take home exam is Wednesday December 22<sup>nd</sup> 2016 3
+pm.</b> </p>
+
+<!--
+<ul type=disc>
+ <li  ><a
+  href="http://www.imm.dtu.dk/courses/02407/exercises/take_home_exam15.pdf">Take home exam</a> - (pdf) </li>
+-->
+ The report has to made individually and it is not 
+ allowed to discuss the exercise with other students or third parties.
+Supplementary questions can be posted on campusnet in the relevant discussion board(s).
+
+The report has to be handed in electronically. If you submit a scanned
+version of a handwritten report 
+
+I will need the original not later than January 10th. The original can be
+sent using ordinary mail.
+<!--
+-->
+
+<!--
+ However, there will be an opportunity to ask question via campus net.
+-->
+<!-- 
+ If I think it is needed there might be one or more open consulation hours.
+ <ul type=circle>
+ <li> Monday December 14th Building 305 Room 205 2pm </li>
+ <li> Thursday December 17th Building 305 Room 205 2pm </li>
+ <li> Monday December 21th Building 321 Room 033 10am </li>
+ </ul>
+-->
+<!-- 
+Supplementary questions can be posted on campusnet in the relevant discussion board(s).
+ - The report has to be
+  signed by all students claiming credit for it. Reports can be
+  authored by one or two students. </li>
+  <li  >If any of you prefer to work in
+  groups of two you will also have to write a report on the additional
+  exercise: <a href="http://www.imm.dtu.dk/courses/02407/aflopgave-e04-2.pdf">Additional exercise for groups of three persons</a>
+  - (pdf) </li>
+</ul>
+-->
+
+<hr>
+
+<p><i>Last change: 10/10 2016, by bfn</i>
+
+
+
+</p><div id="feedly-mini" title="feedly Mini tookit"></div></body><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>
