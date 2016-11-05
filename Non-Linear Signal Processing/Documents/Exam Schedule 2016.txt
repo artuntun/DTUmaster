@@ -19,7 +19,7 @@ Monday Dec 5 Afternoon (Examiner: )
 -----------------------------------------
 13:00 13:30 Nicki;Skafte;s123182
 13:30 14:00 Júlio César;Medeiros Diniz;s155128
-14:00 14:30 
+14:00 14:30 Saahil Sandeep;Desai;s151479 
 14:30 15:00
 15:30 16:00
 16:00 16:30
@@ -38,10 +38,10 @@ Tuesday Dec 6 Morning (Examiner: )
 Tuesday Dec 6 Afternoon (Examiner: )
 -----------------------------------------
 12:30 13:00 Patrycja Alina;Ksiazek;s151914
-13:00 13:30 Julian;Lemos Vinasco;s150959
-13:30 14:00 Ida Kjær;Jacobsen;s144270
+13:00 13:30 
+13:00 14:00 Ida Kjær;Jacobsen;s144270
 14:00 14:30 Camilla;Lund;s121822
-14:30 15:00 
+14:30 15:00 Lea Sass;Berthou;s123901 
 15:30 16:00
 16:00 16:30
 -----------------------------------------
@@ -71,7 +71,7 @@ Wednesday Dec 7 Afternoon (Examiner: )
 
 Monday Dec 12 Morning (Examiner: )
 -----------------------------------------
-09:30 10:00 
+09:30 10:00 Julian;Lemos Vinasco;s150959
 10:00 10:30 Nicolai;Westergren;s112049
 10:30 11:00 Marcus;Svendstorp;s132036
 11:00 11:30 Merlin;von Soosten;s155594
@@ -111,7 +111,7 @@ Tuesday Dec 13 Afternoon (Examiner: )
 -----------------------------------------
 
 
-Thursday Dec 15 Morning (Examiner: )
+Thursday Dec 15 Morning (Examiner: Preben Kidmose)
 -----------------------------------------
 09:30 10:00 Silvia;Tarantino;s161176
 10:00 10:30 Ines;Duranza Rodriguez;s151810
@@ -120,7 +120,7 @@ Thursday Dec 15 Morning (Examiner: )
 11:30 12:00 Marco Dal Farra;Kristensen;s152630
 -----------------------------------------
 
-Thursday Dec 15 Afternoon (Examiner: )
+Thursday Dec 15 Afternoon (Examiner: Preben Kidmose)
 -----------------------------------------
 13:00 13:30 Giovanni;Brajato;s160975
 13:30 14:00 Konstantinos;Anyfantakis;s151142
@@ -138,13 +138,13 @@ Tuesday Jan 03 Morning (Examiner: Søren Holdt Jensen)
 09:30 10:00 Christian Anker;Vandet;s130546
 10:00 10:30 Valentina;Campagnaro;s151897
 10:30 11:00 Martin;Kristiansen;s123019
-11:00 11:30 Lea Sass;Berthou;s123901
+11:00 11:30 Edwin Rishok;Ranjitkumar;s140035
 11:30 12:00 Gandalf;Saxe;s113093
 -----------------------------------------
 
 Tuesday Jan 03 Afternoon (Examiner:  Søren Holdt Jensen)
 -----------------------------------------
-13:00 13:30 Toke;Faurby;s136232
+12:30 13:30 Toke;Faurby;s136232   
 13:30 14:00 Salina Ngoc;Lam;s144238
 14:00 14:30 Benjamin;Jüttner;s161463 
 14:30 15:00 Mohammad Nurul;Amin;s154456
@@ -160,9 +160,7 @@ Not yet Assigned
 ------------------------
 Valentin;Skokov;s161070
 Kristoffer Vinther;Olesen;s162873
-Saahil Sandeep;Desai;s151479
-Piotr;Dworzynski;s081750
 Peter Wæde;Hansen;s011684
-Edwin Rishok;Ranjitkumar;s140035
+
 
 
